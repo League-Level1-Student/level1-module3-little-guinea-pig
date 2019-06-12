@@ -5,6 +5,8 @@ package _03_jukebox;
  */
 
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -12,7 +14,10 @@ import java.net.URL;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import javazoom.jl.player.advanced.AdvancedPlayer;
@@ -20,9 +25,31 @@ import javazoom.jl.player.advanced.AdvancedPlayer;
 /*   If you don't have javazoom.jar in your project, you can download it from here: http://bit.ly/javazoom
  *   Right click your project and add it as a JAR (Under Java Build Path > Libraries).*/
 
-public class Jukebox implements Runnable {
-
+public class Jukebox implements Runnable, ActionListener {
+	  	JFrame frame = new JFrame();
+	  	JPanel panel = new JPanel();
+	  	JButton buttonOne = new JButton();
+    	Song a =  new Song("NIVIRO . - NIVIRO - The Floor Is Lava (Original Mix).mp3");
+   	  	Song b = new Song("NIVIRO - The Apocalypse [NCS Release].mp3"); 
+   	    Song c = new Song("twinkle.mp3");
+	  	
+	    JButton buttonTwo = new JButton();
+	    JButton buttonThree = new JButton();
+	    JButton buttonFour = new JButton();
     public void run() {
+ 
+   	 buttonOne.addActionListener(this);
+   	buttonTwo.addActionListener(this);
+   	buttonThree.addActionListener(this);
+   	buttonFour.addActionListener(this);
+   	frame.setVisible(true);
+   	    panel.add(buttonOne);
+   	    panel.add(buttonTwo);
+   	    panel.add(buttonThree);
+   	 panel.add(buttonFour);
+   	    frame.add(panel);
+   	    frame.pack();
+   	    
 
 		// 1. Find an mp3 on your computer or on the Internet.
 		// 2. Create a Song object for that mp3
@@ -44,6 +71,32 @@ public class Jukebox implements Runnable {
 		URL imageURL = getClass().getResource(fileName);
 		Icon icon = new ImageIcon(imageURL);
 		return new JLabel(icon);
+	}
+
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		if (arg0.getSource().equals(buttonOne)){			
+			a.stop();
+			b.stop();
+			c.play();
+		}
+		else if(arg0.getSource().equals(buttonTwo)) {
+			a.stop();
+			c.stop();
+			b.play();
+		}
+		else if(arg0.getSource().equals(buttonThree)){
+			c.stop();
+			b.stop();
+			a.play();
+		}
+		else if(arg0.getSource().equals(buttonFour)) {
+			c.stop();
+			b.stop();
+			a.stop();
+		}
 	}
 
 }
@@ -131,5 +184,6 @@ class Song {
 			return this.getClass().getResourceAsStream(songAddress);
 		}
 	}
+	
 }
 
