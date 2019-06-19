@@ -46,10 +46,10 @@ public class MediaPalace {
 	}
 
 	/*
-	 * To use this method, you must first have the javazoom jar inthe project.
+	 * To use this method, you must first have the javazoom jar in the project.
 	 * If this jar has not been added, you can download from: http://www.javazoom.net/javalayer/javalayer.html
 	 * Uncomment this method.
-	 */
+	
 	// private void playMp3FromComputer(String fileName) throws JavaLayerException {
 	// FileInputStream songStream = new FileInputStream(fileName);
 	//

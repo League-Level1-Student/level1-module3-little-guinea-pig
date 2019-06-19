@@ -15,6 +15,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
@@ -46,18 +47,19 @@ public class MagicBox extends JPanel implements Runnable, MouseListener {
 			System.err.println(w.getMessage());
 		}
 	}
-
+	JFrame frame = new JFrame("The Magic Box contains many secrets...");
 	private void createUI() {
-		JFrame frame = new JFrame("The Magic Box contains many secrets...");
+		
 		frame.add(this);
-		setPreferredSize(new Dimension(backgroundImage.getWidth(), backgroundImage.getHeight()));
+		setPreferredSize(new Dimension(backgroundImage.getWidth()*2, backgroundImage.getHeight()*2));
 		frame.pack();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
+		frame.addMouseListener(this);
 	}
 
 	private void loadBackgroundImage() throws Exception {
-		String imageFile = "src/magic_box/magic-box.jpg";
+		String imageFile = "src/_04_magic_box/magic-box.jpg";
 		try {
 			backgroundImage = ImageIO.read(new File(imageFile));
 		} catch (IOException e) {
@@ -73,8 +75,30 @@ public class MagicBox extends JPanel implements Runnable, MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+		MediaPalace a = new MediaPalace();
+		JLabel label = new JLabel();
+		int blue = -9911626;
+		int yellow = -3965952;
+		int white = -1253727;
+		int mouseColor = backgroundImage.getRGB(e.getX(), e.getY());
+		label = a.loadImageFromWithinProject("magic-box.jpg");
+        JPanel panel = new JPanel();
+        panel.add(label);
+        frame.add(panel);
+        frame.pack();
+	if(mouseColor == blue) {
+		a.loadImageFromWithinProject("magic-box.jpg");
 	}
+	else if(mouseColor == yellow) {
+		a.playMusicOnComputer("b.wav");
+	}
+	else if(mouseColor == white) {
+		a.speak("this is how not to program");
+	}
+
+        
+        
+        }
 
 	@Override
 	public void mousePressed(MouseEvent e) {
